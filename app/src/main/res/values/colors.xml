@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="news_detail_title">#222</color>
+    <color name="news_detail_subtitle">#444</color>
+    <color name="news_detail_text">#777</color>
 </resources>
