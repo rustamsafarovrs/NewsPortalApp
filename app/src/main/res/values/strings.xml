@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">News PortalTest</string>
+    <string name="app_name">News Portal Test</string>
+
+    <string name="nav_item_header">NewsTJ</string>
+    <string name="nav_item_mail">info@news.tj</string>
+
+    <string name="nav_item_1">Хабарҳо</string>
+    <string name="nav_item_2">Тоҷикистон</string>
+    <string name="nav_item_3">Осиёи Марказӣ</string>
+    <string name="nav_item_4">Ҷаҳон</string>
+    <string name="nav_item_5">Сиёсат</string>
+    <string name="nav_item_6">Иқтисод</string>
+    <string name="nav_item_7">Варзиш</string>
+    <string name="nav_item_8">Ҷомеа</string>
+    <string name="nav_item_9">Минтақаҳо</string>
+    <string name="nav_item_10">Фарҳанг</string>
 </resources>
