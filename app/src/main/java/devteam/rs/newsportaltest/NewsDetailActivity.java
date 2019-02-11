@@ -3,8 +3,13 @@ package devteam.rs.newsportaltest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +21,7 @@ public class NewsDetailActivity extends AppCompatActivity {
 
     public static final String NEWS_ID = "id";
 
+
     private TextView mTitleTextView;
     private TextView mSubtitleTextView;
     private TextView mTextView;
@@ -26,6 +32,14 @@ public class NewsDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news_detail);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        if (toolbar != null){
+            toolbar.setTitleMarginStart(5);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        findViewById(R.id.news_detail_container).setVisibility(View.GONE);
+        findViewById(R.id.progressbar).setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
 
@@ -41,9 +55,27 @@ public class NewsDetailActivity extends AppCompatActivity {
         call.enqueue(new Callback<NewsDetailList>() {
             @Override
             public void onResponse(Call<NewsDetailList> call, Response<NewsDetailList> response) {
+
+                Picasso.get()
+                        .load(response.body().getNewsDetails().get(0).getUrlImage())
+                        .into((ImageView) findViewById(R.id.news_detail_image_view));
+
+                ((TextView)findViewById(R.id.news_detail_category))
+                        .setText(response.body().getNewsDetails().get(0).getCategory());
+
+                ((TextView)findViewById(R.id.news_detail_date))
+                        .setText(response.body().getNewsDetails().get(0).getLastModifiedDate());
+
+                ((TextView)findViewById(R.id.news_detail_author))
+                        .setText(response.body().getNewsDetails().get(0).getAuthorName());
+
                 mTitleTextView.setText(response.body().getNewsDetails().get(0).getTitle());
                 mSubtitleTextView.setText(response.body().getNewsDetails().get(0).getSubtitle());
                 mTextView.setText(response.body().getNewsDetails().get(0).getText());
+
+
+                findViewById(R.id.progressbar).setVisibility(View.GONE);
+                findViewById(R.id.news_detail_container).setVisibility(View.VISIBLE);
 
                 Log.i("NewsPortal", "onResponse");
 
@@ -53,10 +85,32 @@ public class NewsDetailActivity extends AppCompatActivity {
             public void onFailure(Call<NewsDetailList> call, Throwable t) {
                 Toast.makeText(NewsDetailActivity.this, "An error occurred during networking", Toast.LENGTH_LONG)
                         .show();
+
+                findViewById(R.id.progressbar).setVisibility(View.GONE);
+                findViewById(R.id.news_detail_container).setVisibility(View.GONE);
+
                 Log.i("NewsPortal", "onFailure", t);
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        this.finish();
 
     }
 }

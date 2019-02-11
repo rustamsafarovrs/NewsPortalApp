@@ -1,8 +1,14 @@
 package devteam.rs.newsportaltest;
 
+import com.google.gson.annotations.SerializedName;
+
 public class News {
 
     private int id;
+    @SerializedName("name")
+    private String categoryName;
+    @SerializedName("url_img")
+    private String urlImg;
     private String title;
     private String subtitle;
 
@@ -12,6 +18,22 @@ public class News {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public String getUrlImg() {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg) {
+        this.urlImg = urlImg;
     }
 
     public String getTitle() {

@@ -2,8 +2,9 @@ package devteam.rs.newsportaltest;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -24,8 +25,12 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     RecyclerView mRecyclerView;
     NewsList mNewsList;
+    private Snackbar mSnackbar;
+    Drawer drawerBuilder;
+    private int mCategory = 1;
 
 
     @Override
@@ -46,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.main_activity_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Call<NewsList> call = ((App) getApplication()).getApi().getNewsList();
+        loadData(mCategory);
+
+    }
+
+    private void loadData(int category){
+        Call<NewsList> call = ((App) getApplication()).getApi().getNewsList(category);
 
         call.enqueue(new Callback<NewsList>() {
             @Override
@@ -59,17 +69,30 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<NewsList> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "An error occurred during networking", Toast.LENGTH_LONG)
+//                Toast.makeText(MainActivity.this, "An error occurred during networking", Toast.LENGTH_LONG)
+//                        .show();
+
+                Snackbar.make(getWindow().getDecorView().getRootView(),
+                        "NO INTERNET CONNECTIONS", Snackbar.LENGTH_LONG)
+                        .setAction("Retry", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                loadData(mCategory);
+
+                            }
+                        })
                         .show();
+
+
                 Log.i("NewsPortal", "onFailure", t);
             }
         });
-
     }
 
     private void initNavigationDrawer(Toolbar toolbar) {
 
         IProfile profile = new ProfileDrawerItem()
+                .withTextColor(getResources().getColor(android.R.color.white))
                 .withName(getString(R.string.nav_item_header))
                 .withEmail(getString(R.string.nav_item_mail))
                 .withIcon(getResources().getDrawable(R.drawable.ic_launcher_background));
@@ -80,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 .addProfiles(profile)
                 .build();
 
-        Drawer drawerBuilder = new DrawerBuilder()
+        drawerBuilder = new DrawerBuilder()
                 .withActivity(this)
                 .withActionBarDrawerToggle(true)
                 .withAccountHeader(accountHeader)
@@ -90,14 +113,31 @@ public class MainActivity extends AppCompatActivity {
                 .addDrawerItems(
                         getIDrawerItems()
                 )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+
+                        //for categories
+                        if (position>0 && position<11){
+                            loadData(position);
+                            mCategory = position;
+                        }
+
+                        Log.i(TAG, "Clicked in pos " + position);
+
+                        return false;
+                    }
+                })
                 .build();
 
     }
 
     private IDrawerItem[] getIDrawerItems() {
+
         return new IDrawerItem[]{new PrimaryDrawerItem()
                 .withName(getString(R.string.nav_item_1))
                 .withIcon(R.drawable.ic_nav_home)
+                .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                 .withIdentifier(1),
 
                 new DividerDrawerItem(),
@@ -105,46 +145,66 @@ public class MainActivity extends AppCompatActivity {
                 new PrimaryDrawerItem()
                         .withName(getString(R.string.nav_item_2))
                         .withIcon(R.drawable.ic_nav_item_2)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                         .withIdentifier(2),
 
                 new PrimaryDrawerItem()
                         .withName(getString(R.string.nav_item_3))
                         .withIcon(R.drawable.ic_nav_item_3)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                         .withIdentifier(3),
 
                 new PrimaryDrawerItem()
                         .withName(getString(R.string.nav_item_4))
                         .withIcon(R.drawable.ic_nav_item_4)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                         .withIdentifier(4),
 
                 new PrimaryDrawerItem()
                         .withName(getString(R.string.nav_item_5))
                         .withIcon(R.drawable.ic_nav_item_5)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                         .withIdentifier(5),
 
                 new PrimaryDrawerItem()
                         .withName(getString(R.string.nav_item_6))
                         .withIcon(R.drawable.ic_nav_item_6)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                         .withIdentifier(6),
 
                 new PrimaryDrawerItem()
                         .withName(getString(R.string.nav_item_7))
                         .withIcon(R.drawable.ic_nav_item_7)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                         .withIdentifier(7),
 
                 new PrimaryDrawerItem()
                         .withName(getString(R.string.nav_item_8))
                         .withIcon(R.drawable.ic_nav_item_8)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                         .withIdentifier(8),
 
                 new PrimaryDrawerItem()
                         .withName(getString(R.string.nav_item_9))
                         .withIcon(R.drawable.ic_nav_item_9)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                         .withIdentifier(9),
 
                 new PrimaryDrawerItem()
                         .withName(getString(R.string.nav_item_10))
                         .withIcon(R.drawable.ic_nav_item_10)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
                         .withIdentifier(10)};
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (drawerBuilder.isDrawerOpen()){
+            drawerBuilder.closeDrawer();
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }

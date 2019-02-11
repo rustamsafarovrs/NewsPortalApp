@@ -1,53 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NewsDetailActivity">
 
-    <include android:id="@+id/toolbar"
-        layout="@layout/toolbar"/>
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible" />
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/news_detail_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
 
-        <LinearLayout
-            android:padding="16dp"
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/news_detail_title"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Title"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="@color/news_detail_title"/>
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/news_detail_subtitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="News subtitle"
-                android:layout_marginTop="16dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/news_detail_subtitle"/>
+                <ImageView
+                    android:id="@+id/news_detail_image_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/background_image" />
 
-            <TextView
-                android:id="@+id/news_detail_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                tools:text="News text"
-                android:layout_marginTop="8dp"
-                android:textColor="@color/news_detail_text"/>
+                <TextView
+                    android:id="@+id/news_detail_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Category"
+                    android:textAllCaps="true"
+                    android:textColor="@color/news_detail_date"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/news_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/news_detail_title"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    tools:text="Title" />
 
-    </ScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
-</LinearLayout>
+                    <TextView
+                        android:id="@+id/news_detail_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Феврал 09, 2019"
+                        android:textColor="@color/news_detail_date"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/news_detail_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Author"
+                        android:textColor="@color/news_detail_author"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/news_detail_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/news_detail_subtitle"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="News subtitle" />
+
+                <TextView
+                    android:id="@+id/news_detail_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/news_detail_text"
+                    android:textSize="18sp"
+                    tools:text="News text" />
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>

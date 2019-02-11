@@ -7,4 +7,10 @@
     <color name="news_detail_title">#222</color>
     <color name="news_detail_subtitle">#444</color>
     <color name="news_detail_text">#777</color>
+    <color name="news_detail_date">#999</color>
+    <color name="nav_item_selected">#888</color>
+    <color name="news_detail_author">#666</color>
+
+
+    <color name="common_border_color">#d6d6d6</color>
 </resources>

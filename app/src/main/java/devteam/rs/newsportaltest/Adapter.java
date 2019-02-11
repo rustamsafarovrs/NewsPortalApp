@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -39,6 +42,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         holder.idTextView.setText(String.valueOf(item.getId()));
 
+        holder.categoryNameTextView.setText(item.getCategoryName());
+
+        Picasso.get()
+                .load(item.getUrlImg())
+                .into(holder.mImageView);
+
         final String pid = holder.idTextView.getText().toString();
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +73,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView idTextView;
+        TextView categoryNameTextView;
+        ImageView mImageView;
         TextView title;
         TextView subtitle;
         CardView cardView;
@@ -71,6 +82,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         ViewHolder(View itemView) {
             super(itemView);
             idTextView = itemView.findViewById(R.id.pid);
+            categoryNameTextView = itemView.findViewById(R.id.news_item_category);
+            mImageView = itemView.findViewById(R.id.news_item_image_view);
             title = itemView.findViewById(R.id.news_item_title);
             subtitle = itemView.findViewById(R.id.news_item_subtitle);
             cardView = itemView.findViewById(R.id.news_item_card_view);
