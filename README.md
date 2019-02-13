@@ -1,2 +1,2 @@
 # NewsPortalApp
-Made with Love in Neksigol Mushovir
+Made ❤ Love in Neksigol Mushovir
