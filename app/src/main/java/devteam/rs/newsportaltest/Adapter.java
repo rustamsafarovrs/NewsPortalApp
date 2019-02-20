@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -44,10 +45,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         holder.categoryNameTextView.setText(item.getCategoryName());
 
-        Picasso.get()
-                .load(item.getUrlImg())
-                .into(holder.mImageView);
-
+        try {
+            Picasso.get()
+                    .load(item.getUrlImg())
+                    .error(R.drawable.background_image)
+                    .into(holder.mImageView);
+        }catch (Exception e){
+            Toast.makeText(mContext, "An Error occureted while loading image.", Toast.LENGTH_LONG).show();
+        }
         final String pid = holder.idTextView.getText().toString();
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {

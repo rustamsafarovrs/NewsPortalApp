@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.main_activity_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setHasFixedSize(false);
 
         loadData(mCategory);
 
@@ -229,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.action_refresh){
-            loadData(1);
+            loadData(mCategory);
             return true;
         }
 
