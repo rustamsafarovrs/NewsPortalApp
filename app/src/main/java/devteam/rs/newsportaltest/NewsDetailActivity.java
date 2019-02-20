@@ -33,7 +33,6 @@ public class NewsDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         if (toolbar != null){
-            toolbar.setTitleMarginStart(5);
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

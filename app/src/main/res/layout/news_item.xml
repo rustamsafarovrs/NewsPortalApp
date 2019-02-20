@@ -5,7 +5,7 @@
     android:layout_margin="0dp"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/news_item_card_view"
         style="@style/MyCardViewStyle"
         android:layout_width="match_parent"
@@ -68,6 +68,6 @@
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

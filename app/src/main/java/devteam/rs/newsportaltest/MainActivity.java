@@ -1,7 +1,11 @@
 package devteam.rs.newsportaltest;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -28,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     RecyclerView mRecyclerView;
     NewsList mNewsList;
-    private Snackbar mSnackbar;
     Drawer drawerBuilder;
     private int mCategory = 1;
 
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if (toolbar != null){
+        if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -55,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loadData(int category){
+    private void loadData(int category) {
         Call<NewsList> call = ((App) getApplication()).getApi().getNewsList(category);
 
         call.enqueue(new Callback<NewsList>() {
             @Override
-            public void onResponse(Call<NewsList> call, Response<NewsList> response) {
+            public void onResponse(@NonNull Call<NewsList> call, @NonNull Response<NewsList> response) {
 
                 mRecyclerView.setAdapter(new Adapter(MainActivity.this, response.body().getNewsList()));
                 Log.i("NewsPortal", "onResponse");
@@ -118,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
 
                         //for categories
-                        if (position>0 && position<11){
+                        if (position > 0 && position < 11) {
                             loadData(position);
                             mCategory = position;
                         }
@@ -134,11 +137,12 @@ public class MainActivity extends AppCompatActivity {
 
     private IDrawerItem[] getIDrawerItems() {
 
-        return new IDrawerItem[]{new PrimaryDrawerItem()
-                .withName(getString(R.string.nav_item_1))
-                .withIcon(R.drawable.ic_nav_home)
-                .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
-                .withIdentifier(1),
+        return new IDrawerItem[]{
+                new PrimaryDrawerItem()
+                        .withName(getString(R.string.nav_item_1))
+                        .withIcon(R.drawable.ic_nav_home)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
+                        .withIdentifier(1),
 
                 new DividerDrawerItem(),
 
@@ -194,16 +198,51 @@ public class MainActivity extends AppCompatActivity {
                         .withName(getString(R.string.nav_item_10))
                         .withIcon(R.drawable.ic_nav_item_10)
                         .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
-                        .withIdentifier(10)};
+                        .withIdentifier(10),
+
+                new DividerDrawerItem(),
+
+                new PrimaryDrawerItem()
+                        .withName(getString(R.string.nav_item_settings))
+                        .withIcon(R.drawable.ic_nav_item_settings)
+                        .withSelectedTextColor(getResources().getColor(R.color.nav_item_selected))
+                        .withIdentifier(11)
+        };
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings){
+
+            return true;
+        } else if(id == R.id.action_add_news){
+            Intent intent = new Intent(MainActivity.this, AddNewsActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_refresh){
+            loadData(1);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+
     }
 
     @Override
     public void onBackPressed() {
 
-        if (drawerBuilder.isDrawerOpen()){
+        if (drawerBuilder.isDrawerOpen()) {
             drawerBuilder.closeDrawer();
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }

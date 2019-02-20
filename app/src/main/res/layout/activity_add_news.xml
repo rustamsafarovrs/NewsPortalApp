@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddNewsActivity">
+
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingBottom="16dp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/add_news_title_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:hint="Enter News Title"/>
+
+            <EditText
+                android:id="@+id/add_news_subtitle_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter News Subtitle"/>
+
+            <EditText
+                android:id="@+id/add_news_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Full Text of News"/>
+
+            <EditText
+                android:id="@+id/add_news_id_author_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Enter News Author ID"/>
+
+            <EditText
+                android:id="@+id/add_news_category_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Enter News Category ID"/>
+
+            <EditText
+                android:id="@+id/add_news_url_img_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:hint="Enter URL of News Image"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add_news_cancel_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:strokeColor="@color/colorAccent"
+                    app:strokeWidth="1dp"
+                    android:backgroundTint="@color/transparent"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_margin="4dp"
+                    app:rippleColor="@color/common_border_color"
+                    android:text="cancel"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/add_news_publish_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textColor="?android:colorPrimary"
+                    android:backgroundTint="@color/colorAccent"
+                    android:textAllCaps="true"
+                    app:rippleColor="@color/common_border_color"
+                    android:layout_margin="4dp"
+                    android:text="publish"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

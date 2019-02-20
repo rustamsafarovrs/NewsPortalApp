@@ -14,4 +14,7 @@
     <string name="nav_item_8">Ҷомеа</string>
     <string name="nav_item_9">Минтақаҳо</string>
     <string name="nav_item_10">Фарҳанг</string>
+    <string name="nav_item_settings">Settings</string>
+    <string name="action_add_news">Add news</string>
+
 </resources>
