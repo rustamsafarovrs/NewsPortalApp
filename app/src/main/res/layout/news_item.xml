@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="0dp"
@@ -14,8 +15,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="4dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true" >
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,38 +34,39 @@
 
             <TextView
                 android:id="@+id/news_item_category"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/rounded_corners"
                 android:text="@string/app_name"
-                android:textSize="14sp"
-                android:background="@drawable/rounded_corners"/>
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp" />
 
             <ImageView
-                android:src="@drawable/background_image"
                 android:id="@+id/news_item_image_view"
                 android:layout_width="match_parent"
-                android:layout_marginTop="12dp"
                 android:layout_height="160dp"
-                android:scaleType="centerCrop" />
+                android:layout_marginTop="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/background_image" />
 
             <TextView
-                android:layout_marginTop="6dp"
                 android:id="@+id/news_item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:text="News Title"
                 android:textColor="@android:color/black"
-                android:textSize="18dp"/>
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/news_item_subtitle"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
                 android:text="But when I connect my real Android phone, the phone browser can't connect to the same web server on my laptop. "
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
